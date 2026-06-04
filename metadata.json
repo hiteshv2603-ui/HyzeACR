@@ -1,0 +1,12 @@
+{
+  "tfjsVersion": "1.3.1",
+  "tmVersion": "2.4.5",
+  "modelName": "HyzeACR",
+  "labels": [
+    "Moon",
+    "Planet",
+    "Galaxy",
+    "Nebula"
+  ],
+  "imageSize": 224
+}
