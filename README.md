@@ -15,7 +15,7 @@ This AI system classifies space related images into the following categories:
 - 🌕 Moon  
 - 🪐 Planet  
 - 🌌 Galaxy  
-- ☁️ Nebula  
+- ☁️ Nebulae
 
 It supports:
 - Image based classification
@@ -33,7 +33,7 @@ It supports:
 ## How to use
 
 1. The easiest way to use the model is by using the web demo at https://hyzeacr.netlify.app (The model is hosted with Google Cloud)
-2. Install a local TensorFlow environment
+2. Install a local TensorFlow/Keras environment
 3. Run this command pip install tensorflow numpy
 4. Next write a python script to run the model
 
