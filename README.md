@@ -36,31 +36,6 @@ It supports:
 2. Install a local TensorFlow environment
 3. Run this command pip install tensorflow numpy
 4. Next write a python script to run the model
-5. Here is an example "import numpy as np
-from tensorflow.keras.models import load_model
-
-# 1. Load the local .h5 model file
-model_path = 'model.h5'
-model = load_model(model_path)
-print("Model loaded successfully!")
-
-# 2. Prepare your dummy or real data 
-# (Replace this with your actual preprocessed input data)
-# Example: If your model expects a 2D image of 28x28 pixels with 1 color channel:
-input_shape = model.input_shape  # Check what dimensions the model expects
-print(f"Expected input shape: {input_shape}")
-
-# Generate sample random data matching the expected shape
-# Typically: (batch_size, height, width, channels)
-sample_input = np.random.rand(1, 28, 28, 1) 
-
-# 3. Run inference
-predictions = model.predict(sample_input)
-
-# 4. Output the result
-print("Inference results:")
-print(predictions)
-"
 
 ---
 
