@@ -1,202 +1,335 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>HyzeACR</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
+:root {
+  --bg-left: #082f63;
+  --bg-mid: #0f5ea8;
+  --bg-right: #6fb7c4;
+  --bg-warm: #f8d48a;
+  --surface: rgba(6, 22, 44, 0.72);
+  --surface-2: rgba(10, 33, 63, 0.82);
+  --border: rgba(255, 255, 255, 0.14);
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.82);
+  --accent: #2f9dff;
+  --accent-hover: #1f86e0;
+  --shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-font-family: Arial, sans-serif;
-max-width: 700px;
-margin: 50px auto;
-padding: 20px;
-text-align: center;
-background: #f5f5f5;
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Lexend", sans-serif;
+  color: var(--text);
+  padding: 40px 16px;
+  background:
+    radial-gradient(circle at 82% 10%, rgba(248, 212, 138, 0.65) 0%, rgba(248, 212, 138, 0.18) 10%, transparent 28%),
+    linear-gradient(115deg, var(--bg-left) 0%, #0b3f79 30%, var(--bg-mid) 55%, #2a8fb1 78%, var(--bg-warm) 100%);
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 h1 {
-color: #333;
-margin-bottom: 10px;
+  margin: 0 0 10px;
+  font-size: 3rem;
+  letter-spacing: 1px;
+  color: var(--text);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.upload-box,
+#predictions {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 28px;
+  margin-top: 22px;
+  backdrop-filter: blur(12px);
 }
 
 .upload-box {
-background: white;
-padding: 30px;
-border-radius: 10px;
-box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-margin: 20px 0;
-}
-
-#image-display {
-max-width: 100%;
-max-height: 400px;
-margin: 20px auto;
-display: none;
-border-radius: 8px;
-box-shadow: 0 3px 15px rgba(0,0,0,0.2);
-}
-
-#predictions {
-background: white;
-padding: 25px;
-border-radius: 10px;
-margin-top: 20px;
-box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-display: none;
-text-align: left;
-}
-
-.prediction-item {
-margin: 12px 0;
-}
-
-.prediction-label {
-display: flex;
-justify-content: space-between;
-margin-bottom: 5px;
-font-weight: bold;
-color: #333;
-}
-
-.prediction-bar-container {
-width: 100%;
-height: 25px;
-background: #e0e0e0;
-overflow: hidden;
-}
-
-.prediction-bar {
-height: 100%;
-transition: width 0.5s ease;
-display: flex;
-align-items: center;
-padding-left: 10px;
-color: white;
-font-weight: bold;
-font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
 input[type="file"] {
-margin: 10px 0;
-padding: 10px;
+  width: 100%;
+  color: var(--muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 14px;
+  font-family: "Lexend", sans-serif;
+  border-radius: 0;
+}
+
+input[type="file"]::file-selector-button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  margin-right: 14px;
+  cursor: pointer;
+  font-family: "Lexend", sans-serif;
+  font-weight: 600;
+  border-radius: 0;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background: var(--accent-hover);
+}
+
+#image-display {
+  max-width: 100%;
+  max-height: 420px;
+  display: none;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  object-fit: contain;
 }
 
 button {
-padding: 12px 25px;
-margin-top: 15px;
-background: #4CAF50;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-font-size: 16px;
+  padding: 14px 24px;
+  background: var(--accent);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  font-size: 16px;
+  font-family: "Lexend", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  border-radius: 0;
+  box-shadow: 0 6px 18px rgba(47, 157, 255, 0.25);
 }
 
 button:hover {
-background: #45a049;
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#predictions {
+  display: none;
+  text-align: left;
+}
+
+#predictions h3 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 18px;
+  color: var(--text);
+}
+
+.prediction-item {
+  margin: 14px 0;
+}
+
+.prediction-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.prediction-bar-container {
+  width: 100%;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.prediction-bar {
+  height: 100%;
+  transition: width 0.5s ease;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: 0;
 }
 
 #loader {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(245, 245, 245, 0.95);
-display: flex;
-align-items: center;
-justify-content: center;
-z-index: 9999;
-font-size: 28px;
-font-weight: bold;
-color: #333;
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(115deg, #082f63 0%, #0f5ea8 55%, #6fb7c4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+#predict-loader {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 10, 20, 0.72);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9998;
+  backdrop-filter: blur(6px);
+}
+
+.predict-loader-box {
+  background: rgba(10, 33, 63, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: white;
+  padding: 18px 26px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  border-radius: 0;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.small-text {
+  color: var(--muted);
+  margin-top: -6px;
+  margin-bottom: 0;
 }
 </style>
 </head>
 <body>
-
 <div id="loader">Loading...</div>
-
-<h1>HyzeACR</h1>
-<p>Astronomical Character Recogntion</p>
-<p>How to use: Search up an image of a Galaxy, Moon, Nebulae, or a Planet. Download that image and drop it and see the model perform!</p>
-
-<div class="upload-box">
-<input type="file" id="image-upload" accept="image/*">
-<img id="image-display" alt="Uploaded Image">
-<button type="button" onclick="predict()" id="predict-btn" style="display:none;">Predict</button>
+<div id="predict-loader">
+  <div class="predict-loader-box">Loading...</div>
 </div>
 
-<div id="predictions">
-<h3 style="text-align: center; margin-bottom: 20px;">Predictions:</h3>
-<div id="prediction-list"></div>
+<div class="container">
+  <h1>HyzeACR</h1>
+  <p class="small-text">Astronomical Character Recognition</p>
+  <p>Search for a Galaxy, Moon, Nebula, or Planet image, upload it here, and see the model predict what it is.</p>
+
+  <div class="upload-box">
+    <input type="file" id="image-upload" accept="image/*">
+    <img id="image-display" alt="Uploaded Image">
+    <button type="button" onclick="predict()" id="predict-btn" style="display:none;">Predict</button>
+  </div>
+
+  <div id="predictions">
+    <h3>Predictions</h3>
+    <div id="prediction-list"></div>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 <script type="text/javascript">
+const URL = "https://teachablemachine.withgoogle.com/models/vdn1O_jJc/";
 let model, maxPredictions;
 let uploadedImage = null;
 
 async function loadModel() {
-const modelURL = URL + "model.json";
-const metadataURL = URL + "metadata.json";
-model = await tmImage.load(modelURL, metadataURL);
-maxPredictions = model.getTotalClasses();
-document.getElementById('loader').style.display = 'none';
+  const modelURL = URL + "model.json";
+  const metadataURL = URL + "metadata.json";
+  model = await tmImage.load(modelURL, metadataURL);
+  maxPredictions = model.getTotalClasses();
+  document.getElementById('loader').style.display = 'none';
 }
-
 loadModel();
 
 document.getElementById('image-upload').addEventListener('change', function(e) {
-const file = e.target.files[0];
-if (file) {
-const reader = new FileReader();
-reader.onload = function(event) {
-const img = document.getElementById('image-display');
-img.src = event.target.result;
-img.style.display = 'block';
-document.getElementById('predict-btn').style.display = 'inline-block';
-uploadedImage = img;
-document.getElementById('predictions').style.display = 'none';
-};
-reader.readAsDataURL(file);
-}
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+      const img = document.getElementById('image-display');
+      img.src = event.target.result;
+      img.style.display = 'block';
+      document.getElementById('predict-btn').style.display = 'inline-block';
+      uploadedImage = img;
+      document.getElementById('predictions').style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
 });
 
 async function predict() {
-if (!uploadedImage || !model) return;
-const prediction = await model.predict(uploadedImage);
-const predictionList = document.getElementById('prediction-list');
-predictionList.innerHTML = '';
-prediction.sort((a, b) => b.probability - a.probability);
+  if (!uploadedImage || !model) return;
 
-const colors = ['#4CAF50', '#2196F3', '#FF9800', '#9C27B0', '#F44336', '#00BCD4', '#E91E63', '#FFC107'];
+  const loader = document.getElementById('predict-loader');
+  const btn = document.getElementById('predict-btn');
 
-for (let i = 0; i < maxPredictions; i++) {
-const percentage = (prediction[i].probability * 100).toFixed(2);
-const color = colors[i % colors.length];
-const div = document.createElement('div');
-div.className = 'prediction-item';
+  loader.style.display = 'flex';
+  btn.disabled = true;
+  btn.textContent = 'Predicting...';
 
-div.innerHTML = `
-<div class="prediction-label">
-<span>${prediction[i].className}</span>
-<span>${percentage}%</span>
-</div>
-<div class="prediction-bar-container">
-<div class="prediction-bar" style="width: ${percentage}%; background: ${color};">
-${percentage > 15 ? percentage + '%' : ''}
-</div>
-</div>
-`;
+  try {
+    const prediction = await model.predict(uploadedImage);
+    const predictionList = document.getElementById('prediction-list');
+    predictionList.innerHTML = '';
+    prediction.sort((a, b) => b.probability - a.probability);
 
-predictionList.appendChild(div);
-}
+    const colors = ['#3bc5ff', '#2f9dff', '#34d399', '#fbbf24', '#a855f7', '#fb7185', '#22c55e', '#f59e0b'];
 
-document.getElementById('predictions').style.display = 'block';
+    for (let i = 0; i < maxPredictions; i++) {
+      const percentage = (prediction[i].probability * 100).toFixed(2);
+      const color = colors[i % colors.length];
+
+      const div = document.createElement('div');
+      div.className = 'prediction-item';
+      div.innerHTML = `
+        <div class="prediction-label">
+          <span>${prediction[i].className}</span>
+          <span>${percentage}%</span>
+        </div>
+        <div class="prediction-bar-container">
+          <div class="prediction-bar" style="width: ${percentage}%; background: ${color};">
+            ${percentage > 15 ? percentage + '%' : ''}
+          </div>
+        </div>
+      `;
+      predictionList.appendChild(div);
+    }
+
+    document.getElementById('predictions').style.display = 'block';
+  } finally {
+    loader.style.display = 'none';
+    btn.disabled = false;
+    btn.textContent = 'Predict';
+  }
 }
 </script>
-
 </body>
 </html>
