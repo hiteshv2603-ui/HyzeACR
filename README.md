@@ -4,24 +4,24 @@ An Image Classification model that detects galaxies, moons, planets, and nebulae
 
 ---
 
-## 🚀 Live Demo
+## The Live Demo
 Go to https://hyzeacr.netlify.app
 ---
 
-## 🧠 What This Project Does
+## What This Project Does
 
 This AI system classifies space related images into the following categories:
 
-- 🌕 Moon  
-- 🪐 Planet  
-- 🌌 Galaxy  
-- ☁️ Nebulae
+-  Moons  
+-  Planets  
+-  Galaxies  
+-  Nebulae
 
 It supports:
 - Image based classification
 ---
 
-## ⚙️ How It Works
+## How It Works
 
 1. A trained machine learning model is loaded in the browser using TensorFlow.js
 2. Any image of a Moon, Planet, Nebulae, or a Galaxy is uploaded to the model
@@ -39,7 +39,7 @@ It supports:
 
 ---
 
-## 🧪 Tech Stack
+## Tech Stack
 
 - TensorFlow.js (browser inference)
 - Keras (model training)
@@ -48,4 +48,11 @@ It supports:
 - HTML (UI)
 
 ---
+
+## More Info?
+
+- If you want more information they are in the devlogs/journals
+
+---
+
 ## Created by Hitesh Vinothkumar
