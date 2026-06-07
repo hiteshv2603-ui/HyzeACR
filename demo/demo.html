@@ -1,334 +1,298 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>HyzeACR</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg-left: #082f63;
-  --bg-mid: #0f5ea8;
-  --bg-right: #6fb7c4;
-  --bg-warm: #f8d48a;
-  --surface: rgba(6, 22, 44, 0.72);
-  --surface-2: rgba(10, 33, 63, 0.82);
-  --border: rgba(255, 255, 255, 0.14);
-  --text: #ffffff;
-  --muted: rgba(255, 255, 255, 0.82);
-  --accent: #2f9dff;
-  --accent-hover: #1f86e0;
-  --shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+--bg-main: #1a1a1a;
+--bg-dark: #0d0d0d;
+--surface: #2a2a2a;
+--surface-2: #1f1f1f;
+--border: rgba(255, 255, 255, 0);
+--text: #ffffff;
+--muted: rgba(255, 255, 255, 0.75);
+--accent: #2f9dff;
+--accent-hover: #1f86e0;
+--shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
 }
-
 * {
-  box-sizing: border-box;
+box-sizing: border-box;
 }
-
 body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: "Lexend", sans-serif;
-  color: var(--text);
-  padding: 40px 16px;
-  background:
-    radial-gradient(circle at 82% 10%, rgba(248, 212, 138, 0.65) 0%, rgba(248, 212, 138, 0.18) 10%, transparent 28%),
-    linear-gradient(115deg, var(--bg-left) 0%, #0b3f79 30%, var(--bg-mid) 55%, #2a8fb1 78%, var(--bg-warm) 100%);
+margin: 0;
+min-height: 100vh;
+font-family: "Chelsea Market", cursive;
+color: var(--text);
+padding: 40px 16px;
+background: var(--bg-main);
 }
-
 .container {
-  max-width: 760px;
-  margin: 0 auto;
-  text-align: center;
+max-width: 760px;
+margin: 0 auto;
+text-align: center;
 }
-
 h1 {
-  margin: 0 0 10px;
-  font-size: 3rem;
-  letter-spacing: 1px;
-  color: var(--text);
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+margin: 0 0 10px;
+font-size: 3rem;
+letter-spacing: 1px;
+color: var(--text);
+text-shadow: 0 2px 14px rgba(0, 0, 0, 0.48);
 }
-
 p {
-  color: var(--muted);
-  line-height: 1.6;
+color: var(--muted);
+line-height: 1.6;
 }
-
 .upload-box,
 #predictions {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  padding: 28px;
-  margin-top: 22px;
-  backdrop-filter: blur(12px);
+background: var(--surface);
+border: none;
+box-shadow: var(--shadow);
+padding: 28px;
+margin-top: 22px;
+backdrop-filter: blur(12px);
+border-radius: 0;
 }
-
 .upload-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 14px;
 }
-
 input[type="file"] {
-  width: 100%;
-  color: var(--muted);
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  padding: 14px;
-  font-family: "Lexend", sans-serif;
-  border-radius: 0;
+width: 100%;
+color: var(--muted);
+background: var(--surface-2);
+border: none;
+padding: 14px;
+font-family: "Chelsea Market", cursive;
+border-radius: 0;
 }
-
 input[type="file"]::file-selector-button {
-  background: var(--accent);
-  color: white;
-  border: none;
-  padding: 10px 14px;
-  margin-right: 14px;
-  cursor: pointer;
-  font-family: "Lexend", sans-serif;
-  font-weight: 600;
-  border-radius: 0;
-  transition: background 0.2s ease, transform 0.15s ease;
+background: var(--accent);
+color: white;
+border: none;
+padding: 10px 14px;
+margin-right: 14px;
+cursor: pointer;
+font-family: "Chelsea Market", cursive;
+font-weight: 600;
+border-radius: 0;
+transition: background 0.2s ease, transform 0.15s ease;
 }
-
 input[type="file"]::file-selector-button:hover {
-  background: var(--accent-hover);
+background: var(--accent-hover);
 }
-
 #image-display {
-  max-width: 100%;
-  max-height: 420px;
-  display: none;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-  object-fit: contain;
+width: 420px;
+height: 420px;
+max-width: 100%;
+display: none;
+border: none;
+box-shadow: none;
+object-fit: cover;
+border-radius: 0;
 }
-
 button {
-  padding: 14px 24px;
-  background: var(--accent);
-  color: white;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  cursor: pointer;
-  font-size: 16px;
-  font-family: "Lexend", sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-  border-radius: 0;
-  box-shadow: 0 6px 18px rgba(47, 157, 255, 0.25);
+padding: 14px 24px;
+background: var(--accent);
+color: white;
+border: none;
+cursor: pointer;
+font-size: 16px;
+font-family: "Chelsea Market", cursive;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+transition: background 0.2s ease, transform 0.15s ease;
+border-radius: 0;
 }
-
 button:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
+background: var(--accent-hover);
+transform: translateY(-1px);
 }
-
 button:active {
-  transform: translateY(0);
+transform: translateY(0);
 }
-
 button:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-  transform: none;
+opacity: 0.7;
+cursor: not-allowed;
+transform: none;
 }
-
 #predictions {
-  display: none;
-  text-align: left;
+display: none;
+text-align: left;
+border-radius: 0;
 }
-
 #predictions h3 {
-  text-align: center;
-  margin-top: 0;
-  margin-bottom: 18px;
-  color: var(--text);
+text-align: center;
+margin-top: 0;
+margin-bottom: 18px;
+color: var(--text);
 }
-
 .prediction-item {
-  margin: 14px 0;
+margin: 14px 0;
 }
-
 .prediction-label {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: var(--text);
+display: flex;
+justify-content: space-between;
+margin-bottom: 8px;
+font-weight: 600;
+color: var(--text);
 }
-
 .prediction-bar-container {
-  width: 100%;
-  height: 24px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid var(--border);
-  overflow: hidden;
+width: 100%;
+height: 24px;
+background: rgba(255, 255, 255, 0.08);
+border: none;
+overflow: hidden;
+border-radius: 0;
 }
-
 .prediction-bar {
-  height: 100%;
-  transition: width 0.5s ease;
-  display: flex;
-  align-items: center;
-  padding-left: 10px;
-  color: white;
-  font-weight: 700;
-  font-size: 13px;
-  border-radius: 0;
+height: 100%;
+transition: width 0.5s ease;
+display: flex;
+align-items: center;
+padding-left: 10px;
+color: white;
+font-weight: 700;
+font-size: 13px;
+border-radius: 0;
 }
-
 #loader {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(115deg, #082f63 0%, #0f5ea8 55%, #6fb7c4 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  font-size: 28px;
-  font-weight: 700;
-  color: white;
-  letter-spacing: 0.5px;
+position: fixed;
+inset: 0;
+background: var(--bg-dark);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 9999;
+font-size: 28px;
+font-weight: 700;
+color: white;
+letter-spacing: 0.5px;
 }
-
 #predict-loader {
-  position: fixed;
-  inset: 0;
-  background: rgba(3, 10, 20, 0.72);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9998;
-  backdrop-filter: blur(6px);
+position: fixed;
+inset: 0;
+background: rgba(5, 10, 15, 0.85);
+display: none;
+align-items: center;
+justify-content: center;
+z-index: 9998;
+backdrop-filter: blur(6px);
 }
-
 .predict-loader-box {
-  background: rgba(10, 33, 63, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  color: white;
-  padding: 18px 26px;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0.6px;
-  border-radius: 0;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+background: var(--surface-2);
+border: none;
+color: white;
+padding: 18px 26px;
+font-size: 22px;
+font-weight: 700;
+letter-spacing: 0.6px;
+border-radius: 0;
+box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
 }
-
 .small-text {
-  color: var(--muted);
-  margin-top: -6px;
-  margin-bottom: 0;
+color: var(--muted);
+margin-top: -6px;
+margin-bottom: 0;
 }
 </style>
 </head>
 <body>
-<div id="loader">Loading...</div>
+<div id="loader">Loading Model...</div>
 <div id="predict-loader">
-  <div class="predict-loader-box">Loading...</div>
+<div class="predict-loader-box">Predicting...</div>
 </div>
-
 <div class="container">
-  <h1>HyzeACR</h1>
-  <p class="small-text">Astronomical Character Recognition</p>
-  <p>Search for a Galaxy, Moon, Nebula, or Planet image, upload it here, and see the model predict what it is.</p>
-
-  <div class="upload-box">
-    <input type="file" id="image-upload" accept="image/*">
-    <img id="image-display" alt="Uploaded Image">
-    <button type="button" onclick="predict()" id="predict-btn" style="display:none;">Predict</button>
-  </div>
-
-  <div id="predictions">
-    <h3>Predictions</h3>
-    <div id="prediction-list"></div>
-  </div>
+<h1>HyzeACR</h1>
+<p class="small-text">Astronomical Character Recognition</p>
+<p>Search for a Galaxy, Moon, Nebula, or Planet image, upload it here, and see the model predict what it is.</p>
+<div class="upload-box">
+<input type="file" id="image-upload" accept="image/*">
+<img id="image-display" alt="Uploaded Image">
+<button type="button" onclick="predict()" id="predict-btn" disabled>Predict</button>
 </div>
-
+<div id="predictions">
+<h3>Predictions</h3>
+<div id="prediction-list"></div>
+</div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
 <script type="text/javascript">
-const URL = "https://teachablemachine.withgoogle.com/models/vdn1O_jJc/";
 let model, maxPredictions;
 let uploadedImage = null;
+let modelLoaded = false;
 
 async function loadModel() {
-  const modelURL = URL + "model.json";
-  const metadataURL = URL + "metadata.json";
-  model = await tmImage.load(modelURL, metadataURL);
-  maxPredictions = model.getTotalClasses();
-  document.getElementById('loader').style.display = 'none';
+const modelURL = URL + "model.json";
+const metadataURL = URL + "metadata.json";
+model = await tmImage.load(modelURL, metadataURL);
+maxPredictions = model.getTotalClasses();
+modelLoaded = true;
+document.getElementById('loader').style.display = 'none';
+document.getElementById('predict-btn').disabled = false;
 }
 loadModel();
 
 document.getElementById('image-upload').addEventListener('change', function(e) {
-  const file = e.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = function(event) {
-      const img = document.getElementById('image-display');
-      img.src = event.target.result;
-      img.style.display = 'block';
-      document.getElementById('predict-btn').style.display = 'inline-block';
-      uploadedImage = img;
-      document.getElementById('predictions').style.display = 'none';
-    };
-    reader.readAsDataURL(file);
-  }
+const file = e.target.files[0];
+if (file) {
+const reader = new FileReader();
+reader.onload = function(event) {
+const img = document.getElementById('image-display');
+img.src = event.target.result;
+img.style.display = 'block';
+document.getElementById('predict-btn').style.display = 'inline-block';
+uploadedImage = img;
+document.getElementById('predictions').style.display = 'none';
+};
+reader.readAsDataURL(file);
+}
 });
 
 async function predict() {
-  if (!uploadedImage || !model) return;
-
-  const loader = document.getElementById('predict-loader');
-  const btn = document.getElementById('predict-btn');
-
-  loader.style.display = 'flex';
-  btn.disabled = true;
-  btn.textContent = 'Predicting...';
-
-  try {
-    const prediction = await model.predict(uploadedImage);
-    const predictionList = document.getElementById('prediction-list');
-    predictionList.innerHTML = '';
-    prediction.sort((a, b) => b.probability - a.probability);
-
-    const colors = ['#3bc5ff', '#2f9dff', '#34d399', '#fbbf24', '#a855f7', '#fb7185', '#22c55e', '#f59e0b'];
-
-    for (let i = 0; i < maxPredictions; i++) {
-      const percentage = (prediction[i].probability * 100).toFixed(2);
-      const color = colors[i % colors.length];
-
-      const div = document.createElement('div');
-      div.className = 'prediction-item';
-      div.innerHTML = `
-        <div class="prediction-label">
-          <span>${prediction[i].className}</span>
-          <span>${percentage}%</span>
-        </div>
-        <div class="prediction-bar-container">
-          <div class="prediction-bar" style="width: ${percentage}%; background: ${color};">
-            ${percentage > 15 ? percentage + '%' : ''}
-          </div>
-        </div>
-      `;
-      predictionList.appendChild(div);
-    }
-
-    document.getElementById('predictions').style.display = 'block';
-  } finally {
-    loader.style.display = 'none';
-    btn.disabled = false;
-    btn.textContent = 'Predict';
-  }
+if (!uploadedImage || !model || !modelLoaded) return;
+const loader = document.getElementById('predict-loader');
+const btn = document.getElementById('predict-btn');
+loader.style.display = 'flex';
+btn.disabled = true;
+btn.textContent = 'Predicting...';
+try {
+const prediction = await model.predict(uploadedImage);
+const predictionList = document.getElementById('prediction-list');
+predictionList.innerHTML = '';
+prediction.sort((a, b) => b.probability - a.probability);
+const colors = ['#3bc5ff', '#2f9dff', '#34d399', '#fbbf24', '#a855f7', '#fb7185', '#22c55e', '#f59e0b'];
+for (let i = 0; i < maxPredictions; i++) {
+const percentage = (prediction[i].probability * 100).toFixed(2);
+const color = colors[i % colors.length];
+const div = document.createElement('div');
+div.className = 'prediction-item';
+div.innerHTML = `
+<div class="prediction-label">
+<span>${prediction[i].className}</span>
+<span>${percentage}%</span>
+</div>
+<div class="prediction-bar-container">
+<div class="prediction-bar" style="width: ${percentage}%; background: ${color};">
+${percentage > 15 ? percentage + '%' : ''}
+</div>
+</div>
+`;
+predictionList.appendChild(div);
+}
+document.getElementById('predictions').style.display = 'block';
+} finally {
+loader.style.display = 'none';
+btn.disabled = false;
+btn.textContent = 'Predict';
+}
 }
 </script>
 </body>
